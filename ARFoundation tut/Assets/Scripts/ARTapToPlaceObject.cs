@@ -26,7 +26,15 @@ public class ARTapToPlaceObject : MonoBehaviour
 
     private void UpdatePlacementInd()
     {
-        placementInd.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
+        if (poseIsValid)
+        {
+            placementInd.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
+            placementInd.SetActive(true);
+        }
+        else
+        {
+            placementInd.SetActive(false);
+        }
     }
 
     private void UpdatePlacement()
@@ -35,7 +43,7 @@ public class ARTapToPlaceObject : MonoBehaviour
         var hits = new List<ARRaycastHit>();
         arOrigin.Raycast(screenCenter, hits, TrackableType.Planes);
 
-        poseIsValid = hits.Count > 0;
+        poseIsValid = hits.Count >= 0;
 
         if (poseIsValid)
         {
