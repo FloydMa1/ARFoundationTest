@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.Experimental.XR;
+using UnityEngine.UI;
 using System;
 
 public class ARTapToPlaceObject : MonoBehaviour
 {
     [SerializeField] private GameObject objectToBePlaced;
     [SerializeField] private GameObject placementInd;
+
+    [SerializeField] private Button placingButton;
 
     private ARSessionOrigin arOrigin;
     private Pose placementPose;
@@ -18,25 +21,15 @@ public class ARTapToPlaceObject : MonoBehaviour
     {
         arOrigin = FindObjectOfType<ARSessionOrigin>();
     }
-    
+
 
     void Update()
     {
         UpdatePlacement();
         UpdatePlacementInd();
-        GetInput();
     }
 
-
-    private void GetInput()
-    {
-        if (poseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            PlaceObject();
-        }
-    }
-
-    private void PlaceObject()
+    public void PlaceObject()
     {
         Instantiate(objectToBePlaced, placementInd.transform.position, placementInd.transform.rotation);
     }
@@ -47,9 +40,11 @@ public class ARTapToPlaceObject : MonoBehaviour
         {
             placementInd.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
             placementInd.SetActive(true);
+            placingButton.gameObject.SetActive(true);
         }
         else
         {
+            placingButton.gameObject.SetActive(false);
             placementInd.SetActive(false);
         }
     }
