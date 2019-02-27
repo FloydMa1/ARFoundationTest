@@ -342,6 +342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03475a9d15660334a82b5679f011601f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectToBePlaced: {fileID: 2856103810773989959, guid: 73cda84499eb01b4ea62497f8e18eb4b,
+    type: 3}
   placementInd: {fileID: 783941206}
 --- !u!4 &898781640
 Transform:
